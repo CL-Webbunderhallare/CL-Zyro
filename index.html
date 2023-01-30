@@ -1,0 +1,225 @@
+<html>
+    <body>
+        <div class="slideshow">
+            <!-- Copy pasta nedanstående div med class slide och ändra länken till bilden. -->
+
+            <!-- Mottagning -->
+            <div
+                class="slides show"
+                style="
+                    background-image: url(https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/YNqERL9E58hXMQJp/testkorning-AzGz3y4367tG4Enj.png);
+                "
+            >
+                <div class="blur">
+                    <h2>Välkommen till</h2>
+                    <h1>Civilingenjör och Lärare</h1>
+                </div>
+            </div>
+            <!-- Följ instagram -->
+            <div
+                class="slides"
+                style="
+                    background-image: url(https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/YNqERL9E58hXMQJp/img_5497-dWx9glpPWyHzJGoj.JPG);
+                "
+            >
+                <div class="blur">
+                    <h2>Följ sektionen på instagram!</h2>
+                    <div class="instagram">
+                        <a
+                            target="_blank"
+                            href="https://instagram.com/clsektionen/"
+                            ><i
+                                class="fa fa-instagram"
+                                style="font-size: 36px"
+                            ></i>
+                            @clsektionen</a
+                        >
+                        <a
+                            target="_blank"
+                            href="https://instagram.com/ctyrelsen/"
+                            ><i
+                                class="fa fa-instagram"
+                                style="font-size: 36px"
+                            ></i>
+                            @ctyrelsen</a
+                        >
+                        <a
+                            target="_blank"
+                            href="https://instagram.com/clmottagning/"
+                            ><i
+                                class="fa fa-instagram"
+                                style="font-size: 36px"
+                            ></i>
+                            @clmottagning</a
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pub -->
+            <div
+                class="slides"
+                style="
+                    background-image: url(https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/YNqERL9E58hXMQJp/gruppbild_hemsida-YNqoK6R1gNf8ZOyM.jpeg);
+                "
+            >
+                <div class="blur">
+                    <h2>PUB! Varje Torsdag Osquars Backe 8</h2>
+                </div>
+            </div>
+        </div>
+    </body>
+    <head>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+
+        <!-- Hämtar fonten - oklart om detta behövs -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+            rel="stylesheet"
+        />
+        <script>
+            // Hämtar alla slides
+            let slideshow_images =
+                document.querySelectorAll('.slideshow .slides');
+            slideshow_images[0].classList.add('show');
+
+            let index = 2; // Start index, kan ändras lämpligt vid debug
+
+            // Tiden för varje slide anges längst ned i millisekunder
+            setInterval(() => {
+                // För att komma åt bilden som ska få en bild över sig
+                prev_index =
+                    index > 0 ? index - 1 : slideshow_images.length - 1;
+
+                // För att komma åt bilden som syntes innan
+                if (prev_index > 0) {
+                    hidden_index = prev_index - 1;
+                } else {
+                    hidden_index = slideshow_images.length - 1;
+                }
+
+                // Ändar klasser
+                slideshow_images[hidden_index].style.zIndex = null;
+                slideshow_images[prev_index].style.zIndex = 50;
+                slideshow_images[prev_index].classList.remove('show');
+                slideshow_images[index].classList.add('show');
+
+                index++;
+                if (index >= slideshow_images.length) {
+                    index = 0;
+                }
+            }, 5500);
+        </script>
+        <!-- Allt för själva slideshowen -->
+        <style>
+            :root {
+                --slideshow-hight: 25rem;
+            }
+            html {
+                height: var(--slideshow-hight);
+            }
+            body {
+                margin: 0;
+            }
+
+            .slideshow {
+                width: 100%;
+                height: var(--slideshow-hight);
+                overflow: hidden;
+            }
+
+            .slideshow .slides {
+                position: absolute;
+
+                z-index: 1;
+                width: 100%;
+                height: var(--slideshow-hight);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                text-align: center;
+            }
+            /* 
+            @-webkit-keyframes slide {
+                from {
+                    transform: translateX(-100%);
+                }
+
+                to {
+                    transform: translateX(0%);
+                }
+            } */
+
+            @keyframes slide {
+                from {
+                    transform: translateX(-100%);
+                }
+
+                to {
+                    transform: translateX(0%);
+                }
+            }
+
+            .slideshow .slides.show {
+                z-index: 100;
+                -webkit-animation: slide 1s forwards;
+                -webkit-animation-delay: 0s;
+                animation: slide 1s backwards;
+                animation-delay: 0s;
+            }
+
+            /*  Allt för innehållet på varje slide  */
+            .blur {
+                /* backdrop-filter: blur(2px); */
+                background-color: rgba(0, 0, 0, 0.2);
+                width: 100%;
+                height: var(--slideshow-hight);
+                display: inline-block;
+            }
+            .slides {
+                font-family: 'Merriweather Sans', sans-serif;
+                backdrop-filter: blur(10px);
+            }
+            h1 {
+                margin-top: 1rem;
+                font-size: 2.5rem;
+                color: white;
+            }
+            h2 {
+                margin-top: 3rem;
+                margin-bottom: 0rem;
+                font-size: 2.5rem;
+                color: white;
+            }
+            p {
+                position: relative;
+                font-size: 2rem;
+                color: white;
+                margin-top: 10px;
+            }
+
+            a {
+                text-decoration: none;
+                color: white;
+                font-size: 2rem;
+            }
+            .instagram {
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+                vertical-align: middle;
+                width: 20rem;
+                margin: auto;
+            }
+            .instagram i {
+                margin-right: 1rem;
+                vertical-align: middle;
+            }
+        </style>
+    </head>
+</html>
